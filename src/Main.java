@@ -17,17 +17,13 @@ public class Main {
     }
 
     public static boolean isPalindrome(int number) {
-        if (number<0) {
-            number= -number;
+        number= Math.abs(number);
+        char[] digits = String.valueOf(number).toCharArray();
+        String reversed = "";
+        for (int i = digits.length -1; i>=0; i--){
+            reversed += digits[i];
         }
-        int temp =number;
-        int rev=0;
-        while (number > 0){
-            int digit = number % 10;
-            rev = rev * 10 + digit;
-            number = number / 10;
-        }
-        return temp == rev;
+        return reversed.equals(String.valueOf(number));
     }
 
     public static boolean isPerfectNumber(int number) {
