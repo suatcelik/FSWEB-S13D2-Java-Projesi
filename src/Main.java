@@ -9,6 +9,10 @@ public class Main {
         System.out.println(isPerfectNumber(5));
         System.out.println(isPerfectNumber(-1));
 
+        System.out.println(numberToWords(123));
+        System.out.println(numberToWords(1010));
+        System.out.println(numberToWords(-12));
+
 
     }
 
@@ -41,5 +45,45 @@ public class Main {
 
 
     }
+
+    public static String numberToWords(int writing) {
+        String words = "";
+        String[] ones = {"Sıfır", "Bir", "İki", "Üç", "Dört", "Beş", "Altı", "Yedi", "Sekiz", "Dokuz"};
+        String[] tens = {"", "On", "Yirmi", "Otuz", "Kırk", "Elli", "Altmış", "Yetmiş", "Seksen", "Doksan"};
+        String[] hundreds = {"", "Yüz", "İki Yüz", "Üç Yüz", "Dört Yüz", "Beş Yüz", "Altı Yüz", "Yedi Yüz", "Sekiz Yüz", "Dokuz Yüz"};
+        String[] thousands = {"", "Bin", "İki Bin", "Üç Bin", "Dört Bin", "Beş Bin", "Altı Bin", "Yedi Bin", "Sekiz Bin", "Dokuz Bin"};
+
+        if (writing < 0) {
+            words += "Eksi ";
+            writing = Math.abs(writing);
+        }
+
+        int len = String.valueOf(writing).length();
+        if (len == 0) {
+            return "Sıfır";
+        }
+
+        if (len > 4) {
+            return "Verilen sayı 4 basamaktan fazla";
+        }
+
+        for (int i = 0; i < len; i++) {
+            int digit = writing % 10;
+            if (i == 0) {
+                words = ones[digit] + words;
+            } else if (i == 1) {
+                words = tens[digit] + " " + words;
+            } else if (i == 2) {
+                words = hundreds[digit] + " " + words;
+            } else if (i == 3) {
+                words = thousands[digit] + " " + words;
+            }
+
+            writing /= 10;
+        }
+
+        return words;
+    }
+
 
 }
